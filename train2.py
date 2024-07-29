@@ -58,19 +58,19 @@ if __name__ == '__main__':
     # train_params
     ap.add_argument("--warmup_mode", type=str, default='linear_epoch_step',
                     help="Warmup Mode")
-    ap.add_argument("--warmup_initial_lr", type=float, default=1e-7,
+    ap.add_argument("--warmup_initial_lr", type=float, default=1e-6,
                     help="Warmup Initial LR")
-    ap.add_argument("--lr_warmup_epochs", type=int, default=10,
+    ap.add_argument("--lr_warmup_epochs", type=int, default=5, # 디폴트 10
                     help="LR Warmup Epochs")
     ap.add_argument("--initial_lr", type=float, default=1e-4,
                     help="Inital LR")
     ap.add_argument("--lr_mode", type=str, default='cosine',
                     help="LR Mode")
-    ap.add_argument("--cosine_final_lr_ratio", type=float, default=0.1,
+    ap.add_argument("--cosine_final_lr_ratio", type=float, default=0.01,
                     help="Cosine Final LR Ratio")
     ap.add_argument("--optimizer", type=str, default='AdamW',
                     help="Optimizer")
-    ap.add_argument("--weight_decay", type=float, default=0.0001,
+    ap.add_argument("--weight_decay", type=float, default=0.001,
                     help="Weight Decay")
     args = vars(ap.parse_args())
 
@@ -144,6 +144,7 @@ if __name__ == '__main__':
                                 "pin_memory": True,
                                 "collate_fn": CrowdDetectionCollateFN(),
                                 "worker_init_fn": worker_init_reset_seed,
+                                "num_workers": args['worker'],
                                 "min_samples": 512
                                 }
     # Valid Data

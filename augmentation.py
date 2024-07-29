@@ -13,9 +13,16 @@ transformations = {
     "rgb_shift": A.Compose([A.RGBShift(p=1.0)]),
     "hue_saturation": A.Compose([A.HueSaturationValue(p=1.0)]),
     "channel_shuffle": A.Compose([A.ChannelShuffle(p=1.0)]),
-    "blur": A.Compose([A.GaussianBlur(blur_limit=(19, 39), p=1.0)]),
+    "blur": A.Compose([A.GaussianBlur(blur_limit=(5, 15), p=1.0)]),  # 연한 블러
     "strong_noise": A.Compose([A.GaussNoise(var_limit=(300.0, 500.0), p=1.0)]),
-    "to_gray": A.Compose([A.ToGray(p=1.0)])
+    "to_gray": A.Compose([A.ToGray(p=1.0)]),
+    "gray2": A.Compose([A.ToGray(p=1.0)]),
+    "brightness_contrast": A.Compose([A.RandomBrightnessContrast(p=1.0)]),  # 밝기 및 대비 조정
+    "clahe": A.Compose([A.CLAHE(p=1.0)]),  # CLAHE 적용
+    "solarize": A.Compose([A.Solarize(p=1.0)]),  # Solarize 효과
+    "invert": A.Compose([A.InvertImg(p=1.0)]),  # 색상 반전
+    "light_blur": A.Compose([A.MedianBlur(blur_limit=7, p=1.0)]),  # 연한 Median 블러
+    "equalize": A.Compose([A.Equalize(p=1.0)])  # 히스토그램 평활화
 }
 
 # 디렉토리의 모든 이미지 파일에 대해 증강 작업 수행
